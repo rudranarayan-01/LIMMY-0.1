@@ -2,8 +2,11 @@ from groq import Groq
 from json import load, dump
 import json
 import datetime
-from dotenv import dotenv_values
+from dotenv import dotenv_values, load_dotenv
 import os
+
+load_dotenv()
+
 data_folder = "Data"
 file_name = "ChatLog.json"
 
@@ -15,15 +18,16 @@ print(file_path)
 env_vars = dotenv_values(".env")
 
 # Retrive API keys
-# Username = env_vars.get("Username")
-# Assistantname = env_vars.get("Assistantname")
-Username = "Akash"
-Assistantname = "Jarvis"
-GroqApiKey = "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"
+Username = os.getenv("Username")
+Assistantname = os.getenv("Assistantname")
+GroqApiKey = os.getenv("GROQ_API_KEY")
+# Username = "Akash"
+# Assistantname = "Jarvis"
+# GroqApiKey = "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"
 
-# print(GroqApiKey)
-# print(Username)
-# print(Assistantname)
+print(GroqApiKey)
+print(Username)
+print(Assistantname)
 
 # Initialize groq client 
 client = Groq(api_key = GroqApiKey)
