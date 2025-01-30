@@ -21,13 +21,8 @@ env_vars = dotenv_values(".env")
 Username = os.getenv("Username")
 Assistantname = os.getenv("Assistantname")
 GroqApiKey = os.getenv("GROQ_API_KEY")
-# Username = "Akash"
-# Assistantname = "Jarvis"
-# GroqApiKey = "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"
 
-print(GroqApiKey)
-print(Username)
-print(Assistantname)
+
 
 # Initialize groq client 
 client = Groq(api_key = GroqApiKey)

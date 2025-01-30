@@ -93,7 +93,7 @@ def RealtimeSearchEngine(prompt):
     
     # Load the chatlog from the json file
     with open(r"Data\ChatLog.json", "r") as f:
-        messages = json.load(f)
+        messages = load(f)
     # Append the current user message to the chatlog
     messages.append({"role": "user", "content": f"{prompt}"}) 
     
