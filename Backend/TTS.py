@@ -27,7 +27,7 @@ async def TextToAudioFile(text):
         print(f"Error generating audio file: {e}")
 
 
-print("Text to audio file created")
+# print("Text to audio file created")
 
 
 # Function to manage speech to text functionality 
@@ -58,7 +58,7 @@ def TTS(Text, func=lambda r=None: True):
         pygame.mixer.quit()
 
 
-print("TTS DONE")
+# print("TTS DONE")
         
 
 # Function to manage text to speech with additional response 
@@ -97,7 +97,7 @@ def TextToSpeech(Text, func = lambda r = None:True):
     else:
         TTS(Text, func)
 
-print("TextToSpeech Done")
+# print("TextToSpeech Done")
     
 # Main Execution Block 
 if __name__ == "__main__":
@@ -106,4 +106,4 @@ if __name__ == "__main__":
         TextToSpeech(input("Enter your query: "))
             
             
-print("Main Execution Block Done")            
+# print("Main Execution Block Done")            
