@@ -37,3 +37,10 @@ professional_responses = [
 messages = []
 
 # System messages for providing context to chatbot
+SystemChatBot = [{"role": "system", "content": f"Hello, I'm {os.getenv("Username")}, You are a content writter. You have to write content like letter"}]
+
+
+# Function to perform google search 
+def GoogleSearch(Topic):
+    search(Topic) # use pywhatkit search funtion to perform a google search
+    return True
