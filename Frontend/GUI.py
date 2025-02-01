@@ -12,4 +12,4 @@ AssistantName = os.getenv("AssistantName")
 current_dir = os.getcwd()
 old_chat_messages = ""
 TempDirPath = rf"{current_dir}\Frontend\Files"
-GraphicsDirPath = rf"{current_dir}"
+GraphicsDirPath = rf"{current_dir}\Frontend\Graphics"
