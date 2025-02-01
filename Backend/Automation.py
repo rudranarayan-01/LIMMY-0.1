@@ -11,14 +11,16 @@ import requests
 import keyboard
 import asyncio
 import os
+import psutil
+import sys
 
-print("import done")
+# print("import done")
 
 # Load environment variables from .env file
 load_dotenv()
 
 GroqAPIKey = os.getenv("GROQ_API_KEY")
-print("GroqAPIKey")
+# print("GroqAPIKey")
 
 # Define CSS classes for parsing specific elements in HTML content
 classes = ["zCubwf", "hgKElc", "LTKOO sy7ric", "Z0Lcw", "gsrt vk_bk FzvWSb YwPhnf", "pclqee", "tw-Data-text tw-text-small tw-ta", "IZ6rdc",
@@ -40,7 +42,7 @@ professional_responses = [
 messages = []
 
 # System messages for providing context to chatbot
-SystemChatBot = [{"role": "system", "content": f"Hello, I'm {os.getenv['Username']}, You are a content writter. You have to write content like letter"}]
+SystemChatBot = [{"role": "system", "content": f"Hello, I'm {os.getenv('Username')}, You are a content writter. You have to write content like letter"}]
 
 
 # Function to perform google search 
@@ -201,6 +203,11 @@ def OpenApp(app, sess = requests.session()):
         'powerpoint': 'https://www.microsoft.com/en-us/microsoft-365/powerpoint',
         'vscode': 'https://code.visualstudio.com/Download',
         'chrome': 'https://www.google.com/chrome/',
+        'instagram': 'https://www.instagram.com/',
+        'facebook': 'https://www.facebook.com/',
+        'twitter': 'https://www.twitter.com/',
+        'github': 'https://github.com/',
+        'discord': 'https://discord.com/download',
     }
     
     # Dictionary for executable names (used by subprocess)
@@ -214,6 +221,11 @@ def OpenApp(app, sess = requests.session()):
         'powerpoint': 'powerpoint',
         'vscode': 'code',  # Visual Studio Code command is 'code'
         'chrome': 'chrome',  # Google Chrome
+        'instagram': 'instagram',
+        'facebook': 'facebook',
+        'twitter': 'twitter',
+        'github': 'github',
+        'discord': 'discord',  # Discord is a desktop application, not a web browser.
     }
     
     # Normalize app name to lowercase
@@ -255,7 +267,33 @@ def CloseApp(app):
         except: 
             return False
         
+
+#############################################       CLOSE    ##########
+def CloseApp(app):
+    try:
+        # List all running processes
+        for proc in psutil.process_iter(attrs=['pid', 'name']):
+            # If process name matches the app name, kill the process
+            if app.lower() in proc.info['name'].lower():  # Case-insensitive match
+                proc.kill()
+                print(f"{app.capitalize()} closed successfully.")
+                return True
+        print(f"{app.capitalize()} not found or is not running.")
+        return False
+    except psutil.NoSuchProcess as e:
+        print(f"Error: {e}")
+        return False
+    except psutil.AccessDenied as e:
+        print(f"Access Denied: {e}")
+        return False
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return False
+
+######################## CLOSE END ##########################
+
         
+
 ## Function to execute System level commands
 def System(command):
     # Nested function to mute the system volume
@@ -273,9 +311,9 @@ def System(command):
         mute()
     elif command == "unmute":
         unmute()
-    elif command == "volume_up":
+    elif command == "volume up":
         volume_up()
-    elif command == "volume_down":
+    elif command == "volume down":
         volume_down()
     
     return True
@@ -338,4 +376,9 @@ async def Automation (commands : list[str]):
         pass
     return True # Indicates success
     
-                     
+
+
+print("Done")     
+
+if __name__ ==  "__main__":
+    asyncio.run(Automation(["open instagram", "open notepad","open whatsapp", "play afsanay", "content srs for Realtime Traffic sign detection"]))   
