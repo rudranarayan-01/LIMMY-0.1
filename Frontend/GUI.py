@@ -233,7 +233,7 @@ class InitialScreen(QWidget):
         self.setFixedHeight(screen_height)
         self.setFixedWidth(screen_width)
         self.setStyleSheet("background-color:black;")
-        self.timer = Qt.QTimer(self)
+        self.timer = QTimer(self)
         self.timer.timeout.connect(self.SpeechRecogText)
         self.timer.start(5)
     
@@ -337,3 +337,59 @@ class CustomTopBar(QWidget):
     
     def minimizeWindow (self):
         self.parent.showMinimized()
+    
+    def maximizeWindow(self):
+        if self.parent().isMaximized():
+            self.parent().showNormal()
+            self.maximize_button.setIcon(self.maximize_icon)
+        else:
+            self.parent().showMaximized()
+            self.maximize_button.setIcon(self.restore_icon)
+            
+    def CloseWindow (self):
+        self.parent().close()
+    
+    def mousePressEvent(self, event):
+        if self.draggable and self.offset:
+            new_pos = event.globalPos() - self.offset
+            self.parent().move(new_pos)
+            
+    def showMessageScreen(self):
+        if self.current_screen is not None:
+            self.current_screen.hide()
+        
+        initial_screen = InitialScreen()
+        layout = self.parent().layout()
+        if layout is not None:
+            layout.addWidget(initial_screen)
+        self.current_screen = initial_screen
+
+class MainWidow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.initUI()
+        
+    def initUI(self):
+        desktop = QApplication.desktop()
+        screen_width = desktop.screenGeometry().width()
+        screen_height = desktop.screenGeometry().height()
+        stacked_widget = QStackedWidget(self)
+        initial_screen = InitialScreen()
+        message_screen = MessaeScreen()
+        stacked_widget.addWidget(initial_screen)
+        stacked_widget.addWidget(message_screen)
+        self.setGeometry(0, 0, screen_width, screen_height)
+        self.setStyleSheet("background-color: black;")
+        top_bar = CustomTopBar(self, stacked_widget)
+        self.setMenuWidget(top_bar)
+        self.setCentralWidget(stacked_widget)
+    
+def GraphicalUserInterface():
+    app = QApplication(sys.argv)
+    window = MainWidow()
+    window.show()
+    sys.exit(app.exec_())
+    
+if __name__ == "__main__":
+    GraphicalUserInterface()
