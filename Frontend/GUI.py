@@ -86,7 +86,7 @@ class ChatSection(QWidget):
         self.chat_text_edit.setFrameStyle(QFrame.NoFrame)
         layout.addWidget(self.chat_text_edit)
         self.setStyleSheet("background-color: black")
-        layout.setSizeConstraint(QVBoxLayout.setDefaultConstraint)
+        layout.setSizeConstraint(QVBoxLayout.SetDefaultConstraint)
         layout.setStretch(1,1)
         self.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding))
         text_color = QColor(Qt.blue)
@@ -96,9 +96,9 @@ class ChatSection(QWidget):
         self.gif_label = QLabel()
         self.gif_label.setStyleSheet("border:none")
         movie = QMovie(GraphicsDirectoryPath("Jarvis.gif"))
-        max_gif_size_w = 480
-        max_gif_size_h = 270
-        movie.setScaledSize(QMovie(max_gif_size_w, max_gif_size_h))
+        # max_gif_size_w = 480
+        # max_gif_size_h = 270
+        # movie.setScaledSize(QMovie(max_gif_size_w, max_gif_size_h))
         self.gif_label.setAlignment(Qt.AlignRight | Qt.AlignBottom)
         self.gif_label.setMovie(movie)
         movie.start()
@@ -149,7 +149,7 @@ class ChatSection(QWidget):
                                background: none;
                            }
                             """)
-        def load_messages(self):
+        def loadMessages(self):
             global old_chat_messages
             with open(TempDirectoryPath("Responces.data"), "r", encoding="utf-8") as file:
                 messages = file.read()
