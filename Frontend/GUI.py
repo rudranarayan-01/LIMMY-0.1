@@ -83,11 +83,13 @@ class ChatSection(QWidget):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(-10,40,40,100)
         layout.setSpacing(-100)
+        
         self.chat_text_edit = QTextEdit()
         self.chat_text_edit.setReadOnly(True)
         self.chat_text_edit.setTextInteractionFlags(Qt.NoTextInteraction)
         self.chat_text_edit.setFrameStyle(QFrame.NoFrame)
         layout.addWidget(self.chat_text_edit)
+        
         self.setStyleSheet("background-color: black")
         layout.setSizeConstraint(QVBoxLayout.SetDefaultConstraint)
         layout.setStretch(1,1)
@@ -96,6 +98,7 @@ class ChatSection(QWidget):
         text_color_text = QTextCharFormat()
         text_color_text.setForeground(text_color)
         self.chat_text_edit.setCurrentCharFormat(text_color_text)
+        
         self.gif_label = QLabel()
         self.gif_label.setStyleSheet("border:none")
         movie = QMovie(GraphicsDirectoryPath("Jarvis.gif"))

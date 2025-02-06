@@ -51,6 +51,7 @@ def SetAssistantStatus(Command):
     with open(rf'{TempDirPath}\Status.data','w',encoding='utf-8') as file:
         file.write(Command)
 
+
 def GetAssistantStatus():
     with open(rf'{TempDirPath}\Status.data','r',encoding='utf-8') as file:
         Status = file.read()
@@ -74,9 +75,9 @@ def ShowTextToScreen(Text):
     with open(rf"{TempDirPath}\Responses.data","w", encoding="utf-8") as file:
         file.write(Text)
         
-print("Done")
 
 
+### Chat Screen #################################################################
 
 class ChatSection(QWidget):
     def __init__(self):
@@ -86,8 +87,8 @@ class ChatSection(QWidget):
         
         # Layout setup
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(10, 40, 40, 100)  # Adjusted margins
-        layout.setSpacing(10)  # Fixed negative spacing
+        layout.setContentsMargins(-10, 40, 40, 100)  # Adjusted margins
+        layout.setSpacing(-100)  # Fixed negative spacing
 
         # Chat Text Edit
         self.chat_text_edit = QTextEdit()
@@ -136,9 +137,17 @@ class ChatSection(QWidget):
                 background: white;
                 min-height: 20px;
             }
-            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical{
+            QScrollBar::add-line:vertical{
                 background: black;
+                subcontrol-position: bottom;
+                subcontrol-origin: bottom;
                 height: 10px;
+            }
+            QScrollBar::sub-line:vertical{
+                               background: black;
+                               subcontrol-position: top;
+                               subcontrol-origin: margin;
+                               height: 10px;
             }
             QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical{
                 border: none;
@@ -336,7 +345,7 @@ class CustomTopBar(QWidget):
         # Title Label
         assistant_name = str(os.getenv("AssistantName", "Assistant")).capitalize()
         title_label = QLabel(f"{assistant_name} AI")
-        title_label.setStyleSheet("color:black; font-size: 18px; background-color:white;")
+        title_label.setStyleSheet("color:black; font-size: 20px; font-weight: bold; background-color:white;")
 
         # Home Button
         home_button = QPushButton("Home")
@@ -440,8 +449,6 @@ class CustomTopBar(QWidget):
         self.current_screen = initial_screen
 
 
-print("Custom Top Bar Done")
-
 ####################################################
 
 class MainWindow(QMainWindow):
@@ -474,16 +481,8 @@ class MainWindow(QMainWindow):
         self.setMenuWidget(top_bar)
         self.setCentralWidget(stacked_widget)
 
-# def GraphicalUserInterface():
-#     app = QApplication.instance()  
-#     if not app:  
-#         app = QApplication(sys.argv)
-
-#     window = MainWindow()  # Ensure MainWindow is defined elsewhere
-#     window.show()
-    
-    # Start the application event loop
-    # sys.exit(app.exec_())
+####################################################
+print("Main Window Done")
     
 def GraphicalUserInterface():
     app = QApplication(sys.argv)
