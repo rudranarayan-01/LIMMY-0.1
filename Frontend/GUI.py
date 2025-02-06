@@ -73,6 +73,9 @@ def TempDirectoryPath(Filename):
 def ShowTextToScreen(Text):
     with open(rf"{TempDirPath}\Responses.data","w", encoding="utf-8") as file:
         file.write(Text)
+        
+print("Done")
+
 
 class ChatSection(QWidget):
     def __init__(self):
@@ -113,8 +116,8 @@ class ChatSection(QWidget):
         font.setPointSize(13)
         self.chat_text_edit.setFont(font)
         self.timer = QTimer(self)
-        self.timer.timeout.connect(self.loadMessages)
-        self.timer.timeout.connect(self.SpeechRecogText)
+        self.timer.timeout.connect(loadMessages)
+        self.timer.timeout.connect(SpeechRecogText)
         self.timer.start()
         self.chat_text_edit.viewport().installEventFilter(self)
         self.setStyleSheet("""
@@ -197,6 +200,9 @@ class ChatSection(QWidget):
             cursor.setBlockFormat(formatm)
             cursor.insertText(message + "\n")
             self.chat_text_edit().setTextCursor(cursor)
+            
+            
+########################################################
 
 class InitialScreen(QWidget):
     def __init__(self, parent=None):
@@ -254,8 +260,10 @@ class InitialScreen(QWidget):
             self.load_icon(GraphicsDirectoryPath("Mic_off.png"), 60, 60)
             MicButtonClosed()
         self.toggled = not self.toggled
+        
+###################################################
 
-class MessaeScreen(QWidget):
+class MessageScreen(QWidget):
     def __init__(self, parent = None):
         super().__init__(parent)
         desktop = QApplication.desktop()
@@ -271,6 +279,8 @@ class MessaeScreen(QWidget):
         self.setFixedHeight(screen_height)
         self.setFixedWidth(screen_width)
 
+###### INITIAL SCREEN ######
+
 class CustomTopBar(QWidget):
     def __init__(self, parent, stacked_widget):
         super().__init__(parent)
@@ -282,6 +292,7 @@ class CustomTopBar(QWidget):
         self.setFixedHeight(50)
         layout = QHBoxLayout()
         layout.setAlignment(Qt.AlignRight)
+        
         home_button = QPushButton()
         home_icon = QIcon(GraphicsDirectoryPath("Home.png"))
         home_button.setIcon(home_icon)
@@ -363,8 +374,10 @@ class CustomTopBar(QWidget):
         if layout is not None:
             layout.addWidget(initial_screen)
         self.current_screen = initial_screen
+    
+############################################
 
-class MainWidow(QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowFlags(Qt.FramelessWindowHint)
@@ -376,7 +389,7 @@ class MainWidow(QMainWindow):
         screen_height = desktop.screenGeometry().height()
         stacked_widget = QStackedWidget(self)
         initial_screen = InitialScreen()
-        message_screen = MessaeScreen()
+        message_screen = MessageScreen()
         stacked_widget.addWidget(initial_screen)
         stacked_widget.addWidget(message_screen)
         self.setGeometry(0, 0, screen_width, screen_height)
@@ -387,7 +400,7 @@ class MainWidow(QMainWindow):
     
 def GraphicalUserInterface():
     app = QApplication(sys.argv)
-    window = MainWidow()
+    window = MainWindow()
     window.show()
     sys.exit(app.exec_())
     
