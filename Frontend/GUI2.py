@@ -43,14 +43,15 @@ def QueryModifier(Query):
 def SetMicrophoneStatus(Command):
     with open(rf'{TempDirPath}\Mic.data','w',encoding='utf-8') as file:
         file.write(Command)
+        
 def GetMicrophoneStatus():
     with open(rf'{TempDirPath}\Mic.data','r',encoding='utf-8') as file:
         Status = file.read()
         return Status
+    
 def SetAssistantStatus(Command):
     with open(rf'{TempDirPath}\Status.data','w',encoding='utf-8') as file:
         file.write(Command)
-
 
 def GetAssistantStatus():
     with open(rf'{TempDirPath}\Status.data','r',encoding='utf-8') as file:
@@ -72,9 +73,11 @@ def TempDirectoryPath(Filename):
     return Path
 
 def ShowTextToScreen(Text):
+    print(Text)
     with open(rf"{TempDirPath}\Responses.data","w", encoding="utf-8") as file:
         file.write(Text)
-        
+
+
 
 
 ### Chat Screen #################################################################
@@ -106,6 +109,11 @@ class ChatSection(QWidget):
         self.gif_label = QLabel()
         self.gif_label.setStyleSheet("border:none")
         movie = QMovie(GraphicsDirectoryPath("Jarvis.gif"))
+        
+        max_gif_size_w = 480
+        max_gif_size_h = 270
+        movie.setScaledSize(QSize(max_gif_size_w, max_gif_size_h))
+        
         self.gif_label.setAlignment(Qt.AlignRight | Qt.AlignBottom)
         self.gif_label.setMovie(movie)
         movie.start()
