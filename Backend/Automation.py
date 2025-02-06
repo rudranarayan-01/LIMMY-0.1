@@ -378,7 +378,7 @@ async def Automation (commands : list[str]):
     
 
 
-print("Done")     
+# print("Done")     
 
 if __name__ ==  "__main__":
     asyncio.run(Automation(["open instagram", "open notepad","open whatsapp", "play afsanay", "content srs for Realtime Traffic sign detection"]))   

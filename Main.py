@@ -1,4 +1,4 @@
-from Frontend.GUI import (
+from Frontend.GUI2 import (
     GraphicalUserInterface,
     SetAssistantStatus,
     SetMicrophoneStatus,
@@ -28,9 +28,14 @@ load_dotenv()
 
 AssistantName = os.getenv("Assistantname")
 Username = os.getenv("Username")
+
+# print(AssistantName, Username)
+
 default_message = f'''{Username} : Hello {AssistantName}, How are you?{AssistantName} : Welcome {Username}. I'm doing well. How may I help you ?'''
 subprocess = []
 Functions = ["open", "close", "play", "system", "content", "google search", "youtube search"]
+
+print("Default functions")
 
 def ShowDefaultChatIfNoChats():
     File = open(r"Data\ChatLog.json", "r", encoding="utf-8")
@@ -39,11 +44,19 @@ def ShowDefaultChatIfNoChats():
             file.write("")
         with open(TempDirectoryPath("Responces.data"), "w", encoding="utf-8") as file:
             file.write(default_message)
+        
+            
+print("Show default chat if no chats")
+
+
 
 def ReadChatLogJson():
     with open(r"Data\ChatLog.json", "r", encoding="utf-8") as file:
         data = json.load(file)
     return data
+
+print("Read Chat Log JSON")
+
 
 def ChatLogIntegration():
     json_data = ReadChatLogJson() 
@@ -58,6 +71,9 @@ def ChatLogIntegration():
     
     with open (TempDirectoryPath("Database.data"), "w", encoding="utf-8") as file:
         file.write(AnswerModifier(formatted_chatlog))
+
+print("Chatlog Integration")
+
         
 def ShowChatsOnGUI():
     File = open (TempDirectoryPath("Database.data"), "r", encoding="utf-8")
@@ -66,9 +82,11 @@ def ShowChatsOnGUI():
         lines = Data.split("\n")
         results = "\n".join(lines)
         File.close()
-        File = open(TempDirectoryPath("Responces.data"), "w", encoding="utf-8")
+        File = open(TempDirectoryPath("Responses.data"), "w", encoding="utf-8")
         File.write(results)
         File.close()
+        
+print("ShowChatsOnGUI")
         
 def InitialExecution():
     SetMicrophoneStatus("False")
@@ -78,6 +96,8 @@ def InitialExecution():
     ShowChatsOnGUI()
     
 InitialExecution()
+
+print("Initial Execution")
 
 def MainExecution():
     TaskExecution = False
@@ -152,14 +172,14 @@ def MainExecution():
             elif "exit" in Queries:
                 QueryFinal = "Okay, Bye !"
                 Answer = ChatBot(QueryModifier(QueryFinal))
-                ShowTextToScreen = (f"{AssistantName}: {Answer}")
+                ShowTextToScreen(f"{AssistantName}: {Answer}")
                 SetAssistantStatus("Answering....")
                 TextToSpeech(Answer)
                 SetAssistantStatus("Answering...")
                 os._exit(1)
-                
+         
+############ BACKEND #############                
 def FirstThread():
-    
     while True:
         CurrentStatus = GetMicrophoneStatus()
         
@@ -173,7 +193,8 @@ def FirstThread():
                 sleep(0.1) 
             else:
                 SetAssistantStatus("Available...")
-                
+      
+ ######## FRONTEND  ########               
 def SecondThread():
     GraphicalUserInterface()
     

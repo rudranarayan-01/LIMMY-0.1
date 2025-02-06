@@ -221,7 +221,7 @@ class ChatSection(QWidget):
         self.chat_text_edit.setTextCursor(cursor)
 
         
-print("Chat session done")
+# print("Chat session done")
 
 ##########################################################
 
@@ -304,7 +304,7 @@ class InitialScreen(QWidget):
         self.toggled = not self.toggled
         
         
-print("Initial Screen Done")
+# print("Initial Screen Done")
 
 ##################################################
     
@@ -490,7 +490,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(stacked_widget)
 
 ####################################################
-print("Main Window Done")
+# print("Main Window Done")
     
 def GraphicalUserInterface():
     app = QApplication(sys.argv)
