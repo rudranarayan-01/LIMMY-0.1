@@ -135,6 +135,8 @@ To ensure faster response times, **Python's threading module** is used. This all
 ## License
 This project is licensed under the **MIT License**.
 
+Feel free to connect ✨✨
+
 ---
 
 ## Contact
