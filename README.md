@@ -128,7 +128,7 @@ To ensure faster response times, **Python's threading module** is used. This all
 
 ## Contributors
 - **Name** - Rudranarayan Sahu
-- **Website** - https://akash0101.pythonanywhere.com/
+- **Website** - https://akash0101.pythonanywhere.com
 
 ---
 
