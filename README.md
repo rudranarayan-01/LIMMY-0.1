@@ -143,4 +143,4 @@ Feel free to connect ✨✨
 ## Contact
 For any queries or contributions, contact **rudranarayansahu.tech@gmail.com** or visit **[GitHub](https://github.com/rudranarayan-01)**.
 
-Thank you !!✨✨
+Thank you ✨✨
